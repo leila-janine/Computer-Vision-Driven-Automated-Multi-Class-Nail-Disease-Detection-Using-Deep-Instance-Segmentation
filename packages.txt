@@ -1,3 +1,5 @@
-libgl1-mesa-glx
+# System dependencies compatible with Debian Trixie
+libgl1
 libglib2.0-0
 libglib2.0-data
+libffi7
