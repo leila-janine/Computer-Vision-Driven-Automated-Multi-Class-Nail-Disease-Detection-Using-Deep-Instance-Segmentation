@@ -13,7 +13,9 @@ st.set_page_config(
 )
 
 # --- Configuration ---
-MODEL_PATH = "best.pt"
+import os
+# Resolve model path relative to this script's location (works on Streamlit Cloud)
+MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "best.pt")
 CONFIDENCE_THRESHOLD = 0.20
 MASK_ALPHA = 0.5
 PROJECT_GROUP_NAME = "youngstunna"
@@ -255,11 +257,20 @@ header { visibility: hidden; }
 # --- Model Loading ---
 @st.cache_resource
 def load_yolo_model(model_path):
+    import traceback, os
     try:
+        if not os.path.exists(model_path):
+            st.session_state["model_error"] = f"File not found: {model_path}"
+            return None
+        file_size_mb = os.path.getsize(model_path) / (1024 * 1024)
+        if file_size_mb < 0.1:
+            st.session_state["model_error"] = f"File too small ({file_size_mb:.2f} MB) - likely corrupted or a Git LFS pointer, not the real model."
+            return None
         model = YOLO(model_path)
         return model
     except Exception as e:
-        print(f"Error loading model: {e}")
+        st.session_state["model_error"] = f"{type(e).__name__}: {e}"
+        st.session_state["model_traceback"] = traceback.format_exc()
         return None
 
 
@@ -340,9 +351,7 @@ with col2:
 
     if model is None:
         st.error(
-            f"FATAL ERROR: Model failed to load from '{MODEL_PATH}'. "
-            "Ensure 'best.pt' is in the application directory."
-        )
+        st.error(f"FATAL ERROR: Model failed to load. Resolved path: {MODEL_PATH}. Ensure best.pt is committed to GitHub in the same folder as app.py.")
         st.stop()
     else:
         uploaded_file = st.file_uploader(
