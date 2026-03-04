@@ -72,10 +72,10 @@ div[data-testid="stVerticalBlock"]:nth-child(1) > div[style*="flex-direction: co
      padding-bottom: 1rem;
 }
 
-/* --- Right Panel Styling (White) --- */
+/* --- Right Panel Styling --- */
 /* Target second column's inner div directly */
 div[data-testid="stVerticalBlock"]:nth-child(2) > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
-    background-color: white;
+    background-color: black;
     padding: 3rem;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
