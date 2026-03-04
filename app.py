@@ -21,7 +21,7 @@ st.markdown("""
 <style>
 /* --- General App Styling --- */
 body {
-    background-color: #f0f2f6; /* Light gray background */
+    background-color: #0047AB; /* Light gray background */
 }
 /* Hide default Streamlit header and hamburger menu */
 .stApp > header {
