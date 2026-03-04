@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # --- Configuration ---
-MODEL_PATH = "best.pt"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "best.pt")
 CONFIDENCE_THRESHOLD = 0.20
 MASK_ALPHA = 0.5
 PROJECT_GROUP_NAME = "youngstunna"
