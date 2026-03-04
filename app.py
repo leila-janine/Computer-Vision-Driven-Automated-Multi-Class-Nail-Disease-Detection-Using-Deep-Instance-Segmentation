@@ -39,7 +39,7 @@ footer { visibility: hidden; }
     padding-right: 2rem;
     max-width: 1200px; /* Limit max width */
     margin: auto;
-    background-color: #e8edf5; /* Light blue-gray page background */
+    background-color:#0047AB; /* Light blue-gray page background */
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
